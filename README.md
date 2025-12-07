@@ -114,3 +114,66 @@ The notebook will:
 - **Conditional Edges**: Routes the workflow to different nodes based on the output of a routing function
 - **State Management**: Shows how state flows through different paths in the graph
 - **Multi-Path Workflows**: Demonstrates how a single graph can handle different processing paths based on input
+
+
+### 3_chatbot.ipynb
+
+Demonstrates building an interactive conversational chatbot using LangGraph with message history and context awareness powered by Google's Gemini LLM.
+
+**What it does:**
+- Loads environment variables to securely access the Google API key
+- Initializes a Google Gemini Flash Lite language model using LangChain's `init_chat_model`
+- Defines a `State` TypedDict with a `messages` field that uses the `add_messages` reducer to accumulate conversation history
+- Creates a `chatbot()` function that:
+  - Takes the current conversation state
+  - Invokes the LLM with the complete message history
+  - Returns the AI's response
+- Builds a simple linear graph: START → chatbot → END
+- Tests the chatbot with a single question
+- Runs an interactive conversation loop that:
+  - Maintains conversation context across multiple turns
+  - Allows the LLM to reference previous messages
+  - Continues until the user types 'exit' or 'quit'
+
+**How to execute:**
+
+1. **Create a `.env` file** in the LangGraph directory with your Google API key:
+   ```
+   GOOGLE_API_KEY=<Your API Key>
+   ```
+   **Note:** The `.env` file is excluded from version control via `.gitignore` to keep your API key secure.
+
+2. Ensure dependencies are installed:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Open the notebook in Jupyter:
+   ```bash
+   jupyter notebook 3_chatbot.ipynb
+   ```
+
+4. Run all cells in sequence to see:
+   - Environment setup
+   - Library imports
+   - LLM initialization and testing
+   - State definition and chatbot function
+   - Graph construction
+   - Single message test
+   - Interactive chat loop
+
+**Expected Output:**
+The notebook will:
+- Display a simple test response from the LLM
+- Show a single Q&A exchange (e.g., "Who was the first person to walk on the moon?")
+- Run an interactive chat session where you can:
+  - Ask follow-up questions that reference previous context
+  - Have multi-turn conversations
+  - See the AI maintain awareness of the conversation history
+
+**Key Concepts:**
+- **Message History**: Uses `add_messages` reducer to accumulate conversation turns
+- **Stateful Conversations**: The graph maintains state across multiple invocations
+- **LLM Integration**: Demonstrates connecting LangGraph with external language models
+- **Interactive Workflows**: Shows how to build user-interactive applications with LangGraph
+- **Secure API Key Management**: Uses environment variables to protect sensitive credentials

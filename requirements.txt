@@ -4,3 +4,5 @@ python-dotenv
 typing
 ipython
 mermaid-py
+langchain
+langchain-google-genai
