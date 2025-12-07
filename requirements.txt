@@ -1,0 +1,6 @@
+ipykernel
+langgraph
+python-dotenv
+typing
+ipython
+mermaid-py
